@@ -1,0 +1,42 @@
+<script language="javascript" type="text/javascript">
+    $(function() {
+
+        $( "#listtool_iframe" ).dialog({
+			autoOpen: false,
+			height: 550,
+			width: 500,
+			modal: true
+		});
+
+		$("#lt_new_file").click(function() {
+            $("#listtool_iframe").html('<iframe frameborder="0" src="<!-- lw:var addurlfile -->" width="99%" height="99%" name="new file"></iframe>');
+            $( "#listtool_iframe" ).dialog("open");
+            return false;
+        });
+        
+		$("#lt_new_link").click(function() {
+            $("#listtool_iframe").html('<iframe frameborder="0" src="<!-- lw:var addurllink -->" width="99%" height="99%" name="new file"></iframe>');
+            $( "#listtool_iframe" ).dialog("open");
+            return false;
+        });
+
+        $("#lt_sorting").click(function() {
+            $("#listtool_iframe").attr("title", "Sortierung");
+            $("#listtool_iframe").html('<iframe frameborder="0" src="<!-- lw:var sorturl -->" width="99%" height="99%" name="new file"></iframe>');
+            $("#listtool_iframe").dialog("open");
+            return false;
+        });
+
+        $(".lt_edit_entry").click(function() {
+            var ltid = $(this).attr('id').replace(/lt_entry_/g, "");
+            $("#listtool_iframe").html('<iframe frameborder="0" src="<!-- lw:var baseurl -->&<!-- lw:var cmdIdentifier -->=editEntry&<!-- lw:var idIdentifier -->='+ltid+'" width="99%" height="99%" name="new file"></iframe>');
+            $("#listtool_iframe").dialog("open");
+            return false;
+        });
+
+    });
+</script>
+
+<div id="listtool_iframe" title="Listtool">
+    Test
+</div>

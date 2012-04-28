@@ -1,0 +1,34 @@
+<fieldset class="lwadminform">
+
+	<legend class="lwadminform">Listtoolbasisdaten bearbeiten</legend>
+	
+	<?php echo $this->form; ?>
+	
+</fieldset>
+<fieldset class="lwadminform">
+
+	<legend class="lwadminform">Rechtezuweisung</legend>
+	<?php echo $this->rightslink; ?>
+	<br/>	
+	
+	<?php if (is_array($this->intranets) && count($this->intranets)>0): ?>
+	<br/>
+	zugeordnete Intranets:
+	<ul>
+	<?php foreach($this->intranets as $intranet): ?>
+		<li><?php echo $intranet['name']; ?></li>
+	<?php endforeach; ?>
+	</ul>	
+	<?php endif; ?>
+
+	<?php if (is_array($this->users) && count($this->users)>0): ?>
+	<br/>
+	zugeordnete Benutzer:
+	<ul>
+	<?php foreach($this->users as $user): ?>
+		<li><?php echo $user['name']; ?></li>
+	<?php endforeach; ?>
+	</ul>	
+	<?php endif; ?>
+
+</fieldset>

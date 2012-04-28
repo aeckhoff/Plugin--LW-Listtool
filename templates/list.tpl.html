@@ -1,0 +1,65 @@
+<!-- lw:if ltRead -->
+    <h1><!-- lw:var listtitle --></h1>
+    <!-- lw:if ltWrite -->
+        <div class="lt_adminfunctions">
+            <a href="#" id="lt_new_file">neue Datei anlegen</a>
+            | <a href="#" id="lt_new_link">neuen Link anlegen</a>
+            <!-- lw:if manualsorting -->| <a href="#" id="lt_sorting">Liste sortieren</a><!-- lw:endif manualsorting -->
+        </div>
+    <!-- lw:endif ltWrite -->
+    <!-- lw:if entries -->
+        <table width="100%" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Datum</th>
+                    <!-- lw:if ltWrite -->
+                    <th>published</th>
+                    <!-- lw:endif ltWrite -->
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- lw:blockstart entry -->
+                <tr class="{{ cycle(['odd', 'even'], loop.index) }}">
+                    <td align="left">
+                        <!-- lw:var id -->
+                    </td>
+                    <td align="left">
+                        <!-- lw:var name -->
+                    </td>
+                    <td align="left">
+                        <!-- lw:var lw_first_date|formatDate --> - <!-- lw:var last_username -->
+                    </td>
+                    <!-- lw:if ltWrite -->
+                    <td align="left">
+                        <!-- lw:var published -->
+                    </td>
+                    <!-- lw:endif ltWrite -->
+                    <td align="left">
+                        <!-- lw:if link -->
+                        <a href="<!-- lw:var opt3text -->">link</a>
+                        <!-- lw:endif link -->
+                        <!-- lw:if file -->
+                        <a href="<!-- lw:var downloadurl -->&<!-- lw:var idIdentifier -->=<!-- lw:var id -->">download</a>
+                        <!-- lw:endif file -->
+                        <!-- lw:if ltWrite -->
+                        <span class="lt_adminfunctions">
+                            | <a href="#" class="lt_edit_entry" id="lt_entry_<!-- lw:var id -->">bearbeiten</a>
+                            | <a href="<!-- lw:var baseurl -->&<!-- lw:var cmdIdentifier -->=deleteEntry&<!-- lw:var idIdentifier -->=<!-- lw:var id -->" onclick="return confirm('wirklich entfernen?');">entfernen</a>
+                        </span>
+                        <!-- lw:endif ltWrite -->
+                    </td>
+                </tr>
+                <!-- lw:blockend entry -->
+            </tbody>
+        </table>
+    <!-- lw:endif entries -->
+    <!-- lw:ifnot entries -->
+        <div class="lt_noentries">Derzeit liegen keine Eintr&auml;ge vor!</div>
+    <!-- lw:endifnot entries -->
+<!-- lw:endif ltRead -->
+<!-- lw:ifnot ltRead -->
+    <!-- Keine Lese-Berechtigung! -->
+<!-- lw:endifnot ltRead -->

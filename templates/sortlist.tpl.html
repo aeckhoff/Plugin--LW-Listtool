@@ -1,0 +1,53 @@
+<!-- lw:if ltWrite -->
+<script type="text/javascript" src="<!-- lw:configurl media -->jquery/tablednd/jquery.tablednd_0_5.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#sorttable").tableDnD({
+			onDragClass: "rowdragging",
+		    onDrop: function(table, row) {
+            	var rows = table.tBodies[0].rows;
+	            var debugStr = ":";
+	            for (var i=0; i<rows.length; i++) {
+	                debugStr += rows[i].id+":";
+	            }
+		        $("#neworder").val(debugStr);
+		    }
+		});
+	});
+</script>
+<fieldset class="lwadminform">
+	<legend class="lwadminform">Listtooleintr&auml;ge</legend>
+	<div class="lw_adminform_infotext">Eintr&auml;ge zum Sortieren mit der Maus ziehen und abschliessend speichern:</div>
+	<!-- lw:if entries -->
+	<table class="itemslist" id="sorttable">
+		<THEAD>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Date</th>
+			</tr>
+		</THEAD>
+		<TBODY>
+            <!-- lw:blockstart entry -->
+			<tr id="<!-- lw:var id -->">
+				<td><!-- lw:var id --> <!-- seq: <!-- lw:var opt1number --> --></td>
+				<td><!-- lw:var name --></td>
+				<td><!-- lw:var lw_first_date|formatDate --></td>
+			</tr>
+			<!-- lw:blockend entry -->
+		</TBODY>
+	</table>
+    <form id="neworderform" method="POST" action="<!-- lw:var actionurl -->">
+		<input type="hidden" id="neworder" name="neworder" value="" />
+		<input type="submit" value="speichern" />
+	</form>
+	<!-- lw:endif entries -->
+    <!-- lw:ifnot entries -->
+	<div>Es sind keine Elemente vorhanden</div>
+	<!-- lw:endifnot entries -->
+	
+</fieldset>
+<!-- lw:endif ltWrite -->
+<!-- lw:ifnot ltWrite -->
+<!-- Keine Schreib-Berechtigung! -->
+<!-- lw:endifnot ltWrite -->

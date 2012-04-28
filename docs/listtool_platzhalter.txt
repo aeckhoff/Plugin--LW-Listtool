@@ -1,0 +1,66 @@
+<!-- lw:if ltRead -->
+
+    <!-- lw:var listtitle -->
+
+    <!-- lw:if ltWrite -->
+
+        a#lt_new_file
+        a#lt_new_link
+        <!-- lw:if manualsorting -->
+            a#lt_sorting
+        <!-- lw:if manualsorting -->
+
+    <!-- lw:if ltWrite -->
+
+    <!-- lw:if entries -->
+        
+        <!-- lw:blockstart entry -->
+        
+            <!-- lw:var oddeven -->
+            <!-- lw:var id -->
+            <!-- lw:var name -->
+            <!-- lw:var description -->
+            <!-- lw:var addinfo -->
+            <!-- lw:var keywords -->
+            <!-- lw:var free_date -->
+            <!-- lw:var first_date -->
+            <!-- lw:var last_date -->
+            <!-- lw:var last_username -->
+            <!-- lw:var published -->
+            
+            <!-- lw:if ltWrite -->
+                a.lt_edit_entry
+                <a href="<!-- lw:var baseurl -->&<!-- lw:var cmdIdentifier -->=deleteEntry&<!-- lw:var idIdentifier -->=<!-- lw:var id -->">delete></a>
+            <!-- lw:if ltWrite -->
+            
+            <!-- lw:if ltRead -->...<!-- lw:if ltRead -->
+
+            <!-- lw:if link -->
+
+                <!-- lw:var linkurl -->
+
+            <!-- lw:endif link -->
+
+            <!-- lw:if file -->
+
+                <!-- lw:var downloadurl -->
+                <!-- lw:var filetype -->
+                <!-- lw:var thumbnailurl -->
+                <!-- lw:var filesize -->
+                <!-- lw:var upload_date -->
+
+            <!-- lw:endif file -->
+
+        <!-- lw:blockend entry -->
+
+    <!-- lw:endif entries -->
+
+    <!-- lw:ifnot entries -->
+    ...
+    <!-- lw:endifnot entries -->
+
+<!-- lw:if ltRead -->
+
+<!-- lw:ifnot ltRead -->
+...
+<!-- lw:endifnot ltRead -->

@@ -1,0 +1,205 @@
+<script language="javascript" type="text/javascript" src="<!-- lw:configurl media -->/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript">
+    tinyMCE.init({
+    mode : "specific_textareas",
+    editor_selector : "listtoolmceEditor",
+    theme : "simple",
+    language : "de",
+    convert_urls : false,
+    relative_urls : false,
+    remove_script_host : false
+    });
+    
+    $(document).ready(function() {
+        $("#shown_opt2number").datepicker({
+            monthNames: ['Januar','Februar','M&auml;rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+            dayNames: ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
+
+            monthNamesShort: ['Jan','Feb','M&auml;r','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
+            dayNamesShort: ['Son','Mon','Die','Mit','Don','Fre','Sam'],
+
+            dateFormat: "dd.mm.yy",
+            altField: '#opt2number', 
+            altFormat: 'yymmdd',
+            changeMonth: true,
+            changeYear: true,
+
+            showOn: 'both',
+            buttonImage: '<!-- lw:configurl media -->/pics/fatcow_icons/16x16_0180/calendar_view_month.png'
+        });
+
+    }); 
+    
+</script>  
+
+<div class="lt_form">
+
+    <!-- lw:if ltWrite -->
+    <form action="<!-- lw:var action -->" method="post" enctype="multipart/form-data">
+
+        <script>
+            $(function() {
+                $( "#tabs" ).tabs();
+            });
+        </script>
+
+        <div class="demo" style="width:98%">
+
+            <div id="tabs">
+
+                <ul>
+                    <li><a href="#tabs-1"><!-- lw:if en -->Base data<!-- lw:endif en --><!-- lw:if de -->Grunddaten<!-- lw:endif de --></a></li>
+                    <li><a href="#tabs-2"><!-- lw:if en -->Additional data<!-- lw:endif en --><!-- lw:if de -->Zusatzdaten<!-- lw:endif de --></a></li>
+                </ul>
+
+                <div id="tabs-1">
+
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->published<!-- lw:endif en --><!-- lw:if de -->ver&ouml;ffentlicht<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><input type="checkbox" name="published" value="1" <!-- lw:if published_checked --> checked="checked" <!-- lw:endif published_checked -->/></div>
+                    </div>
+
+                    <!-- lw:if error1 --><div class="lt_error"><!-- lw:if en -->Please enter a value!<!-- lw:endif en --><!-- lw:if de -->Bitte einen Wert eingeben!<!-- lw:endif de --></div><!-- lw:endif error1 -->
+                    <!-- lw:if error2 --><div class="lt_error"><!-- lw:if en -->only 255 characters allowed!<!-- lw:endif en --><!-- lw:if de -->Der Wert darf maximal 255 Zeichen lang sein!<!-- lw:endif de --></div><!-- lw:endif error2 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel">Name</div>
+                        <div class="lt_fieldvalue"><input type="text" name="name" value="<!-- lw:var name -->" size="40" /></div>
+                    </div>                
+
+                    <!-- lw:if error3 --><div class="lt_error"><!-- lw:if en -->only 255 characters allowed!<!-- lw:endif en --><!-- lw:if de -->Der Wert darf maximal 255 Zeichen lang sein!<!-- lw:endif de --></div><!-- lw:endif error3 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Description<!-- lw:endif en --><!-- lw:if de -->Beschreibung<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><textarea name="description" rows="3" cols="38" class="listtoolmceEditor" /><!-- lw:var description --></textarea></div>
+                    </div>                
+
+                    <!-- lw:if error4 --><div class="lt_error"><!-- lw:if en -->only 8 characters allowed!<!-- lw:endif en --><!-- lw:if de -->Der Wert darf maximal 8 Zeichen lang sein!<!-- lw:endif de --></div><!-- lw:endif error4 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Free date<!-- lw:endif en --><!-- lw:if de -->Freies Datum<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue">
+                            <input id="opt2number" type="hidden" name="opt2number" value="<!-- lw:var opt2number -->" />
+                            <input id="shown_opt2number" type="text" name="shown_opt2number" value="<!-- lw:var opt2number|formatDate -->" class="lw_fe_datepicker" />
+                        </div>
+                    </div>                
+
+                    <!-- lw:if link -->
+                    <!-- lw:if error5 --><div class="lt_error"><!-- lw:if en -->only 255 characters allowed!<!-- lw:endif en --><!-- lw:if de -->Der Wert darf maximal 255 Zeichen lang sein!<!-- lw:endif de --></div><!-- lw:endif error5 -->
+                    <!-- lw:if error8 --><div class="lt_error"><!-- lw:if en -->Please enter a value!<!-- lw:endif en --><!-- lw:if de -->Bitte einen Wert eingeben!<!-- lw:endif de --></div><!-- lw:endif error8 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Link<!-- lw:endif en --><!-- lw:if de -->Verlinkung<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><input type="text" name="opt3text" value="<!-- lw:var opt3text -->" size="40" /></div>
+                    </div>                
+                    <!-- lw:endif link -->
+
+                    <!-- lw:if file -->
+                    <!-- lw:if error9 -->
+                    <div class="lt_error">
+                        <!-- lw:if en -->Files of this type are not allowed!<!-- lw:endif en --><!-- lw:if de -->Dateien dieses Typs sind nicht erlaubt!<!-- lw:endif de -->
+                        <!-- lw:if error9_allowed --><br/><!-- lw:if en -->allowed<!-- lw:endif en --><!-- lw:if de -->erlaubt ist<!-- lw:endif de -->: <!-- lw:var opt2file_allowed --> <!-- lw:endif error9_allowed -->
+                        <!-- lw:if error9_notallowed --><br/><!-- lw:if en -->not allowed<!-- lw:endif en --><!-- lw:if de -->nicht erlaubt ist<!-- lw:endif de -->: <!-- lw:var opt2file_notallowed --> <!-- lw:endif error9_notallowed -->
+                    </div>
+                    <!-- lw:endif error9 -->
+                    <!-- lw:if error10 --><div class="lt_error"><!-- lw:if en -->Please upload a file!<!-- lw:endif en --><!-- lw:if de -->Bitte eine Datei hochladen!<!-- lw:endif de --></div><!-- lw:endif error10 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->File<!-- lw:endif en --><!-- lw:if de -->Datei<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue">
+                            <input type="file" name="opt2file" /><br/>
+                        </div>
+                    </div>
+                    <!-- lw:if fileexists -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->File<!-- lw:endif en --><!-- lw:if de -->Datei<!-- lw:endif de -->:</div>
+                        <div class="lt_fieldvalue"><!-- lw:var opt2file_name --></div>
+                    </div>
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->File rights<!-- lw:endif en --><!-- lw:if de -->Dateirechte<!-- lw:endif de -->:</div>
+                        <div class="lt_fieldvalue"><!-- lw:var opt2file_rights --></div>
+                    </div>
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Fiel Upload Date<!-- lw:endif en --><!-- lw:if de -->Uploaddatum<!-- lw:endif de -->:</div>
+                        <div class="lt_fieldvalue"><!-- lw:var opt3number|formatDate --></div>
+                    </div>
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->File size<!-- lw:endif en --><!-- lw:if de -->Gr&ouml;&szlig;e<!-- lw:endif de -->:</div>
+                        <div class="lt_fieldvalue"><!-- lw:var opt2file_size --></div>
+                    </div>
+                    <!-- lw:endif fileexists -->
+                    <!-- lw:endif file -->
+
+                    <input type="submit" value="speichern" />
+
+                </div>
+                <div id="tabs-2">
+
+                    <!-- lw:if error6 --><div class="lt_error"><!-- lw:if en -->only 255 characters allowed!<!-- lw:endif en --><!-- lw:if de -->Der Wert darf maximal 255 Zeichen lang sein!<!-- lw:endif de --></div><!-- lw:endif error6 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Additional Info<!-- lw:endif en --><!-- lw:if de -->Zusatzinfo<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><textarea name="opt1text" rows="3" cols="37" /><!-- lw:var opt1text --></textarea></div>
+                    </div>                
+
+                    <!-- lw:if error7 --><div class="lt_error"><!-- lw:if en -->only 255 characters allowed!<!-- lw:endif en --><!-- lw:if de -->Der Wert darf maximal 255 Zeichen lang sein!<!-- lw:endif de --></div><!-- lw:endif error7 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Keywords<!-- lw:endif en --><!-- lw:if de -->Stichworte<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><textarea name="opt2text" rows="3" cols="37" /><!-- lw:var opt2text --></textarea></div>
+                    </div>                
+
+                    <!-- lw:if lw_last_date -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Last change<!-- lw:endif en --><!-- lw:if de -->letzte &Auml;nderung<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><!-- lw:var lw_last_date|formatDate --></div>
+                    </div>                
+                    <!-- lw:endif lw_last_date -->
+                    
+                    <!-- lw:if last_username -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->Last user<!-- lw:endif en --><!-- lw:if de -->Letzter Bearbeiter<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><!-- lw:var last_username --></div>
+                    </div>
+                    <!-- lw:endif last_username -->
+                    
+                    <!-- lw:if lw_first_date -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->added<!-- lw:endif en --><!-- lw:if de -->angelegt<!-- lw:endif de --></div>
+                        <div class="lt_fieldvalue"><!-- lw:var lw_first_date|formatDate --></div>
+                    </div>                 
+                    <!-- lw:endif lw_first_date -->
+                    
+                    <!-- lw:if error13 -->
+                    <div class="lt_error">
+                        <!-- lw:if en -->Files of this type are not allowed!<!-- lw:endif en --><!-- lw:if de -->Dateien dieses Typs sind nicht erlaubt!<!-- lw:endif de -->
+                        <!-- lw:if error13_allowed --><br/><!-- lw:if en -->allowed<!-- lw:endif en --><!-- lw:if de -->erlaubt ist<!-- lw:endif de -->: <!-- lw:var error13_allowed --> <!-- lw:endif error13_allowed -->
+                    </div>
+                    <!-- lw:endif error13 -->
+
+                    <!-- lw:if error14 --><div class="lt_error"><!-- lw:if en -->Please upload a file!<!-- lw:endif en --><!-- lw:if de -->Bitte eine Datei hochladen!<!-- lw:endif de -->!</div><!-- lw:endif error14 -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel">Thumbnail</div>
+                        <div class="lt_fieldvalue">
+                            <input type="file" name="opt1file" /><br/>
+                        </div>
+                    </div>                
+
+                    <!-- lw:if opt1file -->
+                    <div class="lt_fieldwrapper">
+                        <div class="lt_fieldlabel"><!-- lw:if en -->File<!-- lw:endif en --><!-- lw:if de -->Datei<!-- lw:endif de -->:</div>
+                        <div class="lt_fieldvalue">
+                            <!-- lw:var opt1file_name --><br/>
+                            <img src="<!-- lw:var opt1file_thumbnail -->" />
+                        </div>
+                    </div>
+                    <!-- lw:endif opt1file -->
+
+                    <input type="submit" value="speichern" />
+
+                </div>
+            </div>
+
+        </div>   
+
+    </form>
+    <!-- lw:endif ltWrite -->
+   
+    <!-- lw:ifnot ltWrite -->
+    <!-- Keine Schreib-Berechtigung! -->
+    <!-- lw:endifnot ltWrite -->
+    
+</div>
