@@ -78,6 +78,7 @@ class ltBackend extends lw_object {
         }
         if ($this->request->getAlnum("pcmd") == "save") {
             $parameter['name'] = $this->request->getRaw("name");
+            $parameter['listtooltype'] = $this->request->getRaw("listtooltype");
             $parameter['template'] = $this->request->getRaw("template");
             $parameter['sorting'] = $this->request->getRaw("sorting");
             $parameter['suffix_type'] = $this->request->getRaw("suffix_type");
@@ -161,10 +162,21 @@ class ltBackend extends lw_object {
         $form->setRenderer()
                 ->setID('lw_listtool')
                 ->setIntroduction('Basisdaten der Liste')
+    			->addFootnote('<i>via Backenduser</i>: darf nur von Administratoren und Redakteuren bearbeitet werden!<br/><i>via Intranetuser</i>: darf nur von Intranetusern bearbeitet werden!<br/><i>via Backend- und Intranetuser oder ------</i>: darf sowohl von Intranet- als auch Backendusern bearbeitet werden!')
     			->addFootnote('Dateiendungen bitte kommasepariert eingeben und mit f&uuml;hrendem Punkt versehen.<br/>Beispiel: <i>.txt,.doc,.xls</i>')
     			->addFootnote('Whitelist: nur die einegegebenen Dateiendungen sind erlaubt<br/>Blacklist: die einegegebenen Dateiendungen sind <strong>nicht</strong> erlaubt<br/>Wurden keine Dateiendungen eingegeben, sind automatisch alle erlaubt!')
                 ->setDefaultErrorMessage('Es sind Fehler aurequestreten!')
                 ->setAction($this->buildUrl(array("pcmd" => "save")));
+
+        $sort = array(array("id" => "", "name" => "----"), array("id" => "backend", "name" => "Backenduser"), array("id" => "intranet", "name" => "Intranetuser"), array("id" => "intranet_backend", "name" => "Intranet- und Backenduser"));
+        $form->createElement("select")
+                ->setName('listtooltype')
+                ->setID('lw_listtool_type')
+                ->setLabel('Verwaltbar durch')
+                ->setValues($sort)
+                ->setFootnote('1')
+                ->setRequired('Bitte eine Auswahl treffen!')
+                ->setFilter('striptags');
 
         $form->createElement("textfield")
                 ->setName('name')
@@ -198,7 +210,7 @@ class ltBackend extends lw_object {
                 ->setID('lw_listtool_suffix')
                 ->setLabel('Dateiendungen')
                 ->setFilter('striptags')
-                ->setFootnote('1')
+                ->setFootnote('2')
                 ->setValidation('hasMaxlength', array('value' => 255), 'Der Wert darf maximal 255 Zeichen lang sein!');
 
         $suffixtypes = array(array("id" => "white", "name" => "Whitelist"), array("id" => "black", "name" => "Blacklist"));
@@ -206,7 +218,7 @@ class ltBackend extends lw_object {
                 ->setName('suffix_type')
                 ->setID('lw_listtool_suffix_type')
                 ->setLabel('Suffixtyp')
-                ->setFootnote('2')
+                ->setFootnote('3')
                 ->setValues($suffixtypes)
                 ->setRequired('Bitte eine Auswahl treffen!')
                 ->setFilter('striptags');
