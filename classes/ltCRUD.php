@@ -22,7 +22,7 @@
 class ltCRUD extends ltBase
 {
 
-	private $language = 'de';
+    private $language = 'de';
 
     public function __construct()
     {
@@ -286,7 +286,10 @@ class ltCRUD extends ltBase
             $ext = lw_io::getFileExtension($file['name']);
             $ext = str_replace(".", "", $ext);
             if ($this->getPluginParameter('suffix')) {
-                $exts = explode(",", $this->getPluginParameter('suffix'));
+                $extis = explode(",", $this->getPluginParameter('suffix'));
+                foreach($extis as $singleext) {
+                    $exts[] = trim($singleext);
+                }
                 if (in_array('.' . $ext, $exts) && $this->getPluginParameter('suffix_type') == "black") {
                     $array = $this->_setSuffixError($array, true);
                 }
